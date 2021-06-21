@@ -5,7 +5,8 @@ import Todos from "./components/Todos";
 import firebase from "./lib/firebase";
 
 function App() {
-  const [user, setUser] = useState("");
+  const initialState = "";
+  const [user, setUser] = useState(() => initialState);
   let provider = new firebase.auth.GoogleAuthProvider();
 
   const signInWithGoogle = () => {

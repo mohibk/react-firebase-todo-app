@@ -9,6 +9,21 @@
   justify-content: center;
 }
 
+.sign-in {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+.sign-in button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+
 .container {
   /* max-width: 968px; */
   margin: 2rem auto;
@@ -22,7 +37,7 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  margin-top: 23px;
+  margin-top: 28px;
   cursor: pointer;
 }
 .container header span {

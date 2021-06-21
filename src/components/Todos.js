@@ -8,12 +8,13 @@ export default function Todos({ user, setUser }) {
   const [text, setText] = useState("");
   const [updating, setUpdating] = useState(false);
   const [todoId, setTodoId] = useState("");
+  const { uid, displayName, photoURL } = user;
 
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
       .collection("todos")
-      .where("userId", "==", user.uid)
+      .where("userId", "==", uid)
       .onSnapshot((snapshot) => {
         setTodos(
           snapshot.docs.map((doc) => ({ ...doc.data(), docId: doc.id }))
@@ -21,7 +22,7 @@ export default function Todos({ user, setUser }) {
       });
 
     return () => unsubscribe();
-  }, [user.uid]);
+  }, [uid]);
 
   const todoDeleteHandler = (docId) => {
     try {
@@ -62,10 +63,9 @@ export default function Todos({ user, setUser }) {
         <button onClick={handleSignOut} type="button" className="sign-out-btn">
           Sign Out
         </button>
-        {console.log(user)}
         <span>
-          <img src={user.photoURL} alt="" />
-          <p>hi, {user.displayName}</p>
+          {photoURL && <img src={photoURL} alt={displayName} />}
+          <p>hi, {displayName}</p>
         </span>
       </header>
       <AddTodo
@@ -74,7 +74,7 @@ export default function Todos({ user, setUser }) {
         updating={updating}
         setUpdating={setUpdating}
         todoId={todoId}
-        userId={user.uid}
+        userId={uid}
       />
       <ul className="todo-list">
         {todos.map((todo) => (
