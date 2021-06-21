@@ -3,24 +3,25 @@ import firebase from "../lib/firebase";
 import { useEffect, useState } from "react";
 import AddTodo from "./AddTodo";
 
-export default function Todos() {
+export default function Todos({ user, setUser }) {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
   const [updating, setUpdating] = useState(false);
   const [todoId, setTodoId] = useState("");
 
   useEffect(() => {
-    firebase
+    const unsubscribe = firebase
       .firestore()
       .collection("todos")
+      .where("userId", "==", user.uid)
       .onSnapshot((snapshot) => {
         setTodos(
           snapshot.docs.map((doc) => ({ ...doc.data(), docId: doc.id }))
         );
       });
 
-    return () => {};
-  }, []);
+    return () => unsubscribe();
+  }, [user.uid]);
 
   const todoDeleteHandler = (docId) => {
     try {
@@ -45,15 +46,35 @@ export default function Todos() {
       console.log(error.message);
     }
   };
+  const handleSignOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => setUser(""))
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="container">
+      <header>
+        <button onClick={handleSignOut} type="button" className="sign-out-btn">
+          Sign Out
+        </button>
+        {console.log(user)}
+        <span>
+          <img src={user.photoURL} alt="" />
+          <p>hi, {user.displayName}</p>
+        </span>
+      </header>
       <AddTodo
         text={text}
         setText={setText}
         updating={updating}
         setUpdating={setUpdating}
         todoId={todoId}
+        userId={user.uid}
       />
       <ul className="todo-list">
         {todos.map((todo) => (

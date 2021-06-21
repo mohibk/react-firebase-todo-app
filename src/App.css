@@ -2,13 +2,40 @@
   font-family: cursive;
 }
 
-.container {
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 968px;
-  margin: 0 auto;
+}
+
+.container {
+  /* max-width: 968px; */
+  margin: 2rem auto;
+}
+.container header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container header button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-top: 23px;
+  cursor: pointer;
+}
+.container header span {
+  text-align: center;
+}
+
+.container header span p {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+.container header span img {
+  width: 3rem;
+  border-radius: 50%;
 }
 
 .add-todo {

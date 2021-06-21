@@ -6,12 +6,14 @@ export default function AddTodo({
   updating,
   setUpdating,
   todoId,
+  userId,
 }) {
   const createTodo = () => {
     try {
       firebase.firestore().collection("todos").add({
         text,
         complete: false,
+        userId,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
