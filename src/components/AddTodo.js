@@ -38,9 +38,9 @@ export default function AddTodo({
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (updating) {
+    if (updating && text) {
       updateTodo();
-    } else {
+    } else if (text) {
       createTodo();
     }
   };
@@ -49,6 +49,7 @@ export default function AddTodo({
     <form onSubmit={formSubmitHandler} className="add-todo">
       <input
         type="text"
+        placeholder="What's next on your mind?"
         value={text}
         onChange={({ target }) => setText(target.value)}
       />

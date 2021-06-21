@@ -32,9 +32,18 @@ export default function Todos() {
 
   const setTodoToUpdate = (id) => {
     const todo = todos.find((todo) => todo.docId === id);
-    console.log(todo);
     setTodoId(todo.docId);
     setText(todo.text);
+  };
+
+  const completeTodoToggler = (docId, complete) => {
+    try {
+      firebase.firestore().collection("todos").doc(docId).update({
+        complete: !complete,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -54,6 +63,7 @@ export default function Todos() {
             deleteHandler={todoDeleteHandler}
             setUpdating={setUpdating}
             setTodoToUpdate={setTodoToUpdate}
+            completeTodoToggler={completeTodoToggler}
           />
         ))}
       </ul>

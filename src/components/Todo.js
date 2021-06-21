@@ -1,3 +1,6 @@
+import { GiCrossMark } from "react-icons/gi";
+import { FiEdit3 } from "react-icons/fi";
+
 export default function Todo({
   text,
   complete,
@@ -5,21 +8,26 @@ export default function Todo({
   deleteHandler,
   setUpdating,
   setTodoToUpdate,
+  completeTodoToggler,
 }) {
   return (
     <li className="todo">
-      <div>
-        <button className="todo-text">{text}</button>
-        <button
+      <button
+        onClick={() => completeTodoToggler(docId, complete)}
+        className={complete ? "todo-text complete" : "todo-text"}
+      >
+        {text}
+      </button>
+
+      <span>
+        <FiEdit3
           onClick={() => {
             setUpdating(true);
             setTodoToUpdate(docId);
           }}
-        >
-          Edit
-        </button>
-        <button onClick={() => deleteHandler(docId)}>Delete</button>
-      </div>
+        />
+        <GiCrossMark onClick={() => deleteHandler(docId)} />
+      </span>
     </li>
   );
 }
