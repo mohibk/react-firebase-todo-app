@@ -25,10 +25,12 @@ export default function Todos({ user, setUser }) {
   }, [uid]);
 
   const todoDeleteHandler = (docId) => {
-    try {
-      firebase.firestore().collection("todos").doc(docId).delete();
-    } catch (error) {
-      console.log(error.message);
+    if (window.confirm("Are you sure you want to delete the task? ")) {
+      try {
+        firebase.firestore().collection("todos").doc(docId).delete();
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
