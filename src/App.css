@@ -1,5 +1,12 @@
 * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   font-family: cursive;
+}
+
+body {
+  width: 100vw;
 }
 
 .app {
@@ -22,6 +29,7 @@
   align-items: center;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
+  margin-top: 1.25rem;
 }
 
 .container {
@@ -31,6 +39,7 @@
 .container header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .container header button {
@@ -107,4 +116,29 @@ svg {
 
 .todo-text.complete {
   text-decoration: line-through;
+}
+
+@media screen and (max-width: 520px) {
+  .app {
+    /* padding: 0 1rem; */
+  }
+  .add-todo {
+    text-align: center;
+  }
+  .add-todo input {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 1.5rem;
+    width: 80%;
+  }
+  .add-todo button {
+    text-align: center;
+  }
+
+  .container header {
+    padding: 0 1rem;
+  }
 }
