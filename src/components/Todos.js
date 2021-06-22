@@ -75,6 +75,7 @@ export default function Todos({ user, setUser }) {
         setUpdating={setUpdating}
         todoId={todoId}
         userId={uid}
+        todos={todos}
       />
       <ul className="todo-list">
         {todos.map((todo) => (

@@ -7,6 +7,7 @@ export default function AddTodo({
   setUpdating,
   todoId,
   userId,
+  todos,
 }) {
   const createTodo = () => {
     try {
@@ -40,7 +41,13 @@ export default function AddTodo({
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (updating && text) {
+    const doesTaskExist = todos.find(
+      (todo) => todo.text.trim().toLowerCase() === text.trim().toLowerCase()
+    );
+
+    if (doesTaskExist) {
+      alert("Task already exist");
+    } else if (updating && text) {
       updateTodo();
     } else if (text) {
       createTodo();
